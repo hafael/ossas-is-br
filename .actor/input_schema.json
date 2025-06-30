@@ -1,0 +1,36 @@
+{
+    "title": "Scrape data from a open science databases and repositories",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "searchQuery": {
+            "title": "Search term",
+            "type": "string",
+            "description": "The search term of website you want to get the data from.",
+            "editor": "textfield",
+            "prefill": "inteligência artificial"
+        },
+        "fromYear": {
+            "title": "Year from",
+            "type": "string",
+            "description": "The from year for filtering results.",
+            "editor": "textfield",
+            "prefill": "2020"
+        },
+        "toYear": {
+            "title": "Year to",
+            "type": "string",
+            "description": "The to year for filtering results.",
+            "editor": "textfield",
+            "prefill": "2025"
+        },
+        "databases": {
+            "title": "Databases",
+            "type": "string",
+            "description": "The database for search.",
+            "editor": "textfield",
+            "prefill": "brapci, scielo"
+        }
+    },
+    "required": ["searchQuery"]
+}

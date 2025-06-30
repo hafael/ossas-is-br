@@ -1,0 +1,12 @@
+{
+    "actorSpecification": 1,
+    "name": "open-science-search-actor",
+    "title": "Scrape science databases in JavaScript",
+    "description": "Scrape data from science databases with provided search term.",
+    "version": "0.0",
+    "meta": {
+        "templateId": "js-start"
+    },
+    "input": "./input_schema.json",
+    "dockerfile": "../Dockerfile"
+}
