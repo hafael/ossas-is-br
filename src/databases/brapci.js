@@ -44,9 +44,10 @@ const fetchData = async () => {
         //console.log('Results from Brapci database', response.data);
     } catch (error) {
         console.error('Failed to search on Brapci database', error);  
+        return []; // Return empty array if request fails
     }
 
-    if (response.data.total === 0) return [];
+    if (!response || !response.data || response.data.total === 0) return [];
 
     // Extract all headings from the page (tag name and text).
     let results = [];

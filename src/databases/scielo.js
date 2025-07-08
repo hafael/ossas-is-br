@@ -9,18 +9,18 @@ import * as cheerio from 'cheerio';
 class Scielo {
 
     // Fetch data from Enancib database.
-    static async fetchData() {
-        return await fetchData();
+    static async fetchData(page = 1) {
+        return await fetchData(page);
     }
 }
 
-const fetchData = async (page) => {
+const fetchData = async (page = 1) => {
 
     // Structure of input is defined in input_schema.json
     const input = await Actor.getInput();
     const { searchQuery, fromYear, toYear, databases } = input;
 
-    const url = `https://search.scielo.org/?fb=&q=${searchQuery}&lang=pt&count=100&from=1&output=site&sort=&format=summary&page=1&where=&filter%5Bla%5D%5B%5D=*&filter%5Bsubject_area%5D%5B%5D=Applied+Social+Sciences`;
+    const url = `https://search.scielo.org/?fb=&q=${searchQuery}&lang=pt&count=100&from=${(page - 1) * 100 + 1}&output=site&sort=&format=summary&page=${page}&where=&filter%5Bla%5D%5B%5D=*&filter%5Bsubject_area%5D%5B%5D=Applied+Social+Sciences`;
 
     // Fetch the HTML content of the page.
     let response;
@@ -33,12 +33,12 @@ const fetchData = async (page) => {
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9',
             }
         });
-        console.log('Results from Scielo database', response.data);
+        //console.log('Results from Scielo database', response.data);
     } catch (error) {
-        console.error('Failed to search on Scielo database', error);  
+        //console.error('Failed to search on Scielo database', error);  
     }
 
-    console.log('Scielo response', response.data);
+    //console.log('Scielo response', response.data);
 
     if(response.data == null){
         return [];
@@ -51,8 +51,8 @@ const fetchData = async (page) => {
     let results = [];
     $('div.results > div.item').each((i, element) => {
 
+        // Get comma separated authors list.
         // const authors = [];
-
         // $(element).children('div:eq(2) .authors a.author').map((i, authorEl) => {
         //     authors.push($(authorEl).text());
         // });
@@ -81,7 +81,7 @@ const fetchData = async (page) => {
             }
 
         };
-        console.log('Extracted heading', itemObject);
+        //console.log('Extracted heading', itemObject);
         results.push(itemObject);
     });
 

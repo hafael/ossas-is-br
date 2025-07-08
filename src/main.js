@@ -21,13 +21,21 @@ let datasets = [];
 for (const dbName of availableDBs) {
     let dataset = [];
     if (dbName === "brapci") {
-        dataset = await Brapci.fetchData();
+        try {
+            dataset = await Brapci.fetchData();
+        } catch (error) {
+            console.error(`Error fetching data from Brapci: ${error.message}`);
+        }
     } else if(dbName === "enancib") {
-        dataset = await Enancib.fetchData();
+        try {
+            dataset = await Enancib.fetchData();
+        } catch (error) {
+            console.error(`Error fetching data from Enancib: ${error.message}`);
+        }
     }else {
         //dataset = await fetchScieloStrategy();
     }
-    datasets = datasets.concat(dataset);
+    datasets.push(...dataset); // Using spread operator to add items to datasets array
 }
 
 // Save results to Dataset - a table-like storage.

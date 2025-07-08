@@ -39,11 +39,12 @@ const fetchData = async (page) => {
         //console.log('Results from Enancib database', response.data);
     } catch (error) {
         console.error('Failed to search on Enancib database', error);  
+        return [];
     }
 
     //console.log('Enancib response', response.data);
 
-    if(response.data == null){
+    if(!response || response.data == null){
         return [];
     }
 
